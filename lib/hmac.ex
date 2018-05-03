@@ -1,18 +1,13 @@
 defmodule Hmac do
-  @moduledoc """
-  Documentation for Hmac.
-  """
+  def main do
+    message = "hola mundo"
+    key = ""
+    IO.puts("hexadecimal message: ")
+    IO.puts(Base.encode16(message, case: :lower))
 
-  @doc """
-  Hello world.
+    message_hex = Base.encode16(message, case: :lower)
 
-  ## Examples
-
-      iex> Hmac.hello
-      :world
-
-  """
-  def hello do
-    :world
+    firma_key = :crypto.hmac(:sha256, key, "") |> Base.encode16()
+    :crypto.hmac(:sha256, firma_key, message_hex) |> Base.encode16()
   end
 end
