@@ -1,13 +1,15 @@
 defmodule Hmac do
   def main do
-    message = "hola mundo"
-    key = ""
-    IO.puts("hexadecimal message: ")
-    IO.puts(Base.encode16(message, case: :lower))
-
+    message = ""
+    key = "1"
     message_hex = Base.encode16(message, case: :lower)
 
-    firma_key = :crypto.hmac(:sha256, key, "") |> Base.encode16()
-    :crypto.hmac(:sha256, firma_key, message_hex) |> Base.encode16()
+    IO.puts("hexadecimal message: ")
+    IO.puts(message)
+    key_hex = Base.encode16(key, case: :lower)
+
+    key_hmac = :crypto.hmac_init(:sha256, key) |> :crypto.hmac_final()
+
+    firma_key = :crypto.hmac(:sha256, key_hex, message) |> Base.encode16(case: :lower)
   end
 end
