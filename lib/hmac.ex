@@ -22,6 +22,7 @@ defmodule Hmac do
 
     IO.puts(firma_key)
     IO.puts(key_hmac)
+    {key, error_status} = System.cmd("helisaSign", ["", ""])
   end
 
   def toBits(str) do
